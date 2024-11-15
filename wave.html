@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveProgram</title>
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        nav a.active {
+            color: #999;
+        }
+
+        nav a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: blue;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dropdown a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #fff;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .dropdown::after {
+            content: ' ▼';
+            font-size: 0.8em;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .course-list {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .course-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px);
+            cursor: pointer;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: scale(1.05);
+        }
+
+        .course-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .course-title {
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-content {
+            position: relative;
+            background-color: #11101036;
+            padding: 200px;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .course-item {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .course-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://cdn-icons-png.flaticon.com/512/11150/11150514.png" alt="Logo Personalizada">
+    <nav>
+        <a onclick="showTab('html')" id="htmlTab" class="active">HTML</a>
+        <a onclick="showTab('css')" id="cssTab">CSS</a>
+        <a onclick="showTab('python')" id="pythonTab">Python</a>
+        <a onclick="showTab('cheats')" id="cheatsTab">Cheats</a>
+
+            </div>
+        </div>
+    </nav>
+    <img src="file:///C:/Users/fuzab/Downloads/png-clipart-computer-icons-avatar-user-profile-people-icon-child-face-thumbnail-Photoroom.png" alt="Logo Secundária" style="height: 50px;">
+</header>
+
+<div class="container">
+    <h2 class="section-title" id="section-title">Cursos de HTML</h2>
+    
+    <div class="course-list" id="html">
+        <!-- Cursos HTML -->
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/nPEpaft1y1k')">
+            <img src="https://www.htmlecsspro.com/uploads/images/2018/03/introducao-ao-html-1521409113.png" alt="Curso 1">
+            <div class="course-title">Curso 1: Introdução ao HTML</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="https://www.htmlecsspro.com/uploads/images/2018/03/introducao-ao-html-1521409113.png" alt="Curso 2">
+            <div class="course-title">Curso 2: HTML Básico</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/8fKUtgoIh4s')">
+            <img src="https://www.htmlecsspro.com/uploads/images/2018/03/introducao-ao-html-1521409113.png" alt="Curso 3">
+            <div class="course-title">Curso 3: HTML Avançado</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/QsDwnuqEXO0')">
+            <img src="https://www.htmlecsspro.com/uploads/images/2018/03/introducao-ao-html-1521409113.png" alt="Curso 4">
+            <div class="course-title">Curso 4: Formulários em HTML</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/8pQ0HlOihG0')">
+            <img src="https://www.htmlecsspro.com/uploads/images/2018/03/introducao-ao-html-1521409113.png" alt="Curso 5">
+            <div class="course-title">Curso 5: HTML Semântico</div>
+        </div>
+    </div>
+
+
+    <div class="course-list" id="css">
+        <!-- Cursos CSS -->
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/1Rs2ND1ryY8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Web_Photo_Editor.jpg" alt="Curso 1">
+            <div class="course-title">Curso 1: Introdução ao CSS</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/yfoY53QXEnI')">
+            <img src="file:///C:/Users/fuzab/Downloads/Web_Photo_Editor.jpg" alt="Curso 2">
+            <div class="course-title">Curso 2: CSS para Iniciantes</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/gHgK4GeUp6Y')">
+            <img src="file:///C:/Users/fuzab/Downloads/Web_Photo_Editor.jpg" alt="Curso 3">
+            <div class="course-title">Curso 3: Layouts com Flexbox</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/NoV6-j8l6xY')">
+            <img src="file:///C:/Users/fuzab/Downloads/Web_Photo_Editor.jpg" alt="Curso 4">
+            <div class="course-title">Curso 4: Transições e Animações em CSS</div>
+        </div>
+    </div>
+
+ 
+    <div class="course-list" id="python">
+        <!-- Cursos Python -->
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/hvqYwfv6wOQ')">
+            <img src="https://ehgomes.com.br/wp-content/uploads/2023/08/Curso-Python-Gratuito.webp" alt="Curso 1">
+            <div class="course-title">Curso 1: Introdução ao Python</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/sugvnHA7ElY')">
+            <img src="https://ehgomes.com.br/wp-content/uploads/2023/08/Curso-Python-Gratuito.webp" alt="Curso 2">
+            <div class="course-title">Curso 2: Python para Iniciantes</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/8g7C8nLE8hM')">
+            <img src="https://ehgomes.com.br/wp-content/uploads/2023/08/Curso-Python-Gratuito.webp" alt="Curso 3">
+            <div class="course-title">Curso 3: Estruturas de Dados em Python</div>
+        </div>
+    </div>
+
+
+    <div class="course-list" id="cheats">
+        <!-- Cursos Cheats -->
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/sugvnHA7ElY')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 1">
+            <div class="course-title">Curso 1:  Como Criar Um Formulário Com Objetos</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 2">
+            <div class="course-title">Curso 2: Como Usar o EditBox Em Jogos ou Aplicações</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 2">
+            <div class="course-title">Curso 3: Como Codificar um Formulário em .exe</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 2">
+            <div class="course-title">Curso 4: Como Linkar uma Função Com Um Objeto</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 2">
+            <div class="course-title">Curso 5:  Como Importar Bibliotéca e DLL e Usar o Objeto Painel</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 2">
+            <div class="course-title">Curso 6: Como Usar uma Label , Botões , CheckBox</div>
+        </div>
+        <div class="course-item" onclick="openVideo('https://www.youtube.com/embed/2hf-6D4xAQ8')">
+            <img src="file:///C:/Users/fuzab/Downloads/Untitled%20Project.jpg" alt="Curso 2">
+            <div class="course-title">Curso 7: Spoofer Com Base Pronta</div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="video-modal" id="video-modal">
+    <div class="video-content">
+        <button class="close-button" onclick="closeModal()">Fechar</button>
+        <iframe id="video-frame" width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script>
+    function openVideo(url) {
+        document.getElementById('video-frame').src = url;
+        document.getElementById('video-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('video-modal').style.display = 'none';
+        document.getElementById('video-frame').src = '';
+    }
+
+    function showTab(tab) {
+        document.querySelectorAll('.course-list').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.querySelectorAll('nav a').forEach(function(link) {
+            link.classList.remove('active');
+        });
+
+        document.getElementById(tab).style.display = 'flex';
+        document.getElementById(tab + 'Tab').classList.add('active');
+        document.getElementById('section-title').textContent = `Cursos de ${tab.toUpperCase()}`;
+    }
+
+    function showDocumentation(tab) {
+        alert(`Mostrando documentação de ${tab.toUpperCase()}`);
+    }
+
+    // Exibir HTML por padrão
+    showTab('html');
+</script>
+<script>
+    const validCode = "12345"; // Código único válido
+    let codeUsed = false; // Controle para evitar reutilização
+
+    function checkCode() {
+        const userCode = prompt("Digite o código para desbloquear os cursos:");
+
+        if (userCode === validCode && !codeUsed) {
+            document.querySelectorAll(".course-list").forEach(section => {
+                section.style.display = "flex"; // Exibe as seções dos cursos
+            });
+            alert("Código aceito! Cursos desbloqueados.");
+            codeUsed = true; // Marca o código como usado
+        } else if (codeUsed) {
+            alert("Este código já foi utilizado!");
+        } else {
+            alert("Código inválido!");
+        }
+    }
+
+    // Ocultar os cursos inicialmente
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".course-list").forEach(section => {
+            section.style.display = "none"; // Esconde as seções dos cursos
+        });
+    });
+</script>
+
+</body>
+</html>
